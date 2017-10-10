@@ -317,21 +317,12 @@ var HeroDetailComponent = (function () {
         this.location.back();
     };
     HeroDetailComponent.prototype.callHero = function () {
-        /*
-            window['plugins'].CallNumber.callNumber(  function onSuccess(result){
-              console.log('Success:' + result);
-            }, function onError(result) {
-              console.log('Error:' + result);
-            }, '872440085', false);
-            // document.location.href = 'tel:872-440-085';*/
-        window['plugins'].phonedialer.dial('2125551212', function (err) {
-            if (err === 'empty') {
-                alert('Unknown phone number');
-            }
-            else {
-                alert('Dialer Error:' + err);
-            }
-        }, function (success) { alert('Dialing succeeded'); });
+        window['plugins'].CallNumber.callNumber(function onSuccess(result) {
+            console.log('Success:' + result);
+        }, function onError(result) {
+            console.log('Error:' + result);
+        }, '872440085', true);
+        // document.location.href = 'tel:872-440-085';
     };
     return HeroDetailComponent;
 }());
