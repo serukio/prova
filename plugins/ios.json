@@ -39,6 +39,9 @@
         },
         "cordova-plugin-call-number": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
     "dependent_plugins": {
@@ -58,9 +61,6 @@
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
-        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
         "cordova-plugin-inappbrowser": {
