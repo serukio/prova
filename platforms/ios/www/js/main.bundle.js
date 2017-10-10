@@ -267,7 +267,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/hero-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"hero\">\n  <h2>{{hero.name}} details!</h2>\n  <div>\n    <label>id: </label>{{hero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n   </div>\n</div>\n<button (click)=\"goBack()\">Back</button>\n<button (click)=\"save()\">Save</button>\n<button (click)=\"locateHero()\">CALL THE HERO!</button>\n<button (click)=\"callHero()\">Where's the hero!?</button>\n<button>CALL Tdffdfd!</button>\n"
+module.exports = "<div *ngIf=\"hero\">\n  <h2>{{hero.name}} details!</h2>\n  <div>\n    <label>id: </label>{{hero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n   </div>\n</div>\n<button (click)=\"goBack()\">Back</button>\n<button (click)=\"save()\">Save</button>\n<button (click)=\"callHero()\">CALL THE HERO!</button>\n<button (click)=\"locateHero()\">Where's the hero!?</button>"
 
 /***/ }),
 
