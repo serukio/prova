@@ -267,7 +267,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/hero-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"hero\">\n  <h2>{{hero.name}} details!</h2>\n  <div>\n    <label>id: </label>{{hero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n   </div>\n</div>\n<button (click)=\"goBack()\">Back</button>\n<button (click)=\"save()\">Save</button>\n<button (click)=\"callHero()\">CALL THE HERO!</button>\n"
+module.exports = "<div *ngIf=\"hero\">\n  <h2>{{hero.name}} details!</h2>\n  <div>\n    <label>id: </label>{{hero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n   </div>\n</div>\n<button (click)=\"goBack()\">Back</button>\n<button (click)=\"save()\">Save</button>\n<button (click)=\"callHero()\">CALL THE HERO!</button>\n<button (click)=\"locateHero()\">Where's the hero!?</button>"
 
 /***/ }),
 
@@ -317,21 +317,29 @@ var HeroDetailComponent = (function () {
         this.location.back();
     };
     HeroDetailComponent.prototype.callHero = function () {
-        /*
-            window['plugins'].CallNumber.callNumber(  function onSuccess(result){
-              console.log('Success:' + result);
-            }, function onError(result) {
-              console.log('Error:' + result);
-            }, '872440085', false);
-            // document.location.href = 'tel:872-440-085';*/
-        window['plugins'].phonedialer.dial('2125551212', function (err) {
-            if (err === 'empty') {
-                alert('Unknown phone number');
-            }
-            else {
-                alert('Dialer Error:' + err);
-            }
-        }, function (success) { alert('Dialing succeeded'); });
+        window['plugins'].CallNumber.callNumber(function onSuccess(result) {
+            console.log('Success:' + result);
+        }, function onError(result) {
+            console.log('Error:' + result);
+        }, '872440085', true);
+        // document.location.href = 'tel:872-440-085';
+    };
+    HeroDetailComponent.prototype.locateHero = function () {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        function onSuccess(position) {
+            alert('Latitude: ' + position.coords.latitude + '\n' +
+                'Longitude: ' + position.coords.longitude + '\n' +
+                'Altitude: ' + position.coords.altitude + '\n' +
+                'Accuracy: ' + position.coords.accuracy + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+                'Heading: ' + position.coords.heading + '\n' +
+                'Speed: ' + position.coords.speed + '\n' +
+                'Timestamp: ' + position.timestamp + '\n');
+        }
+        function onError(error) {
+            alert('code: ' + error.code + '\n' +
+                'message: ' + error.message + '\n');
+        }
     };
     return HeroDetailComponent;
 }());
