@@ -317,7 +317,6 @@ var HeroDetailComponent = (function () {
         this.location.back();
     };
     HeroDetailComponent.prototype.callHero = function () {
-        this.checkEnabled();
         window['plugins'].CallNumber.callNumber(function onSuccess(result) {
             console.log('Success:' + result);
         }, function onError(result) {
@@ -326,7 +325,7 @@ var HeroDetailComponent = (function () {
         // document.location.href = 'tel:872-440-085';
     };
     HeroDetailComponent.prototype.locateHero = function () {
-        // this.checkEnabled();
+        this.checkEnabled();
         navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
         function onSuccess(position) {
             alert('Latitude: ' + position.coords.latitude + '\n' +
@@ -344,9 +343,10 @@ var HeroDetailComponent = (function () {
         }
     };
     HeroDetailComponent.prototype.checkEnabled = function () {
-        cordova.plugins.diagnostic.isLocationAvailable(function (available) { onSuccess(available); }, function (error) { goToSettings(error); });
+        cordova.plugins.diagnostic.isLocationEnabled(function (available) { onSuccess(available); }, function (error) { goToSettings(error); });
         function onSuccess(available) {
             if (available) {
+                window.confirm('ok');
             }
             else {
                 goToSettings(available);
@@ -354,8 +354,8 @@ var HeroDetailComponent = (function () {
         }
         function goToSettings(error) {
             console.log('error: ', error);
-            if (window.confirm('You need to enable location settings to use the geolocation feature.')) {
-                cordova.plugins.diagnostic.switchToSettings();
+            if (window.confirm('necesitas encender la localizacion para usar esta funcion.')) {
+                // cordova.plugins.diagnostic.switchToSettings();
             }
         }
     };
