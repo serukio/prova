@@ -351,29 +351,33 @@ var HeroDetailComponent = (function () {
         function goToSettings(error) {
             console.log('error: ', error);
             if (window.confirm('necesitas encender la ubicacion para usar esta funcion.')) {
-                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
-                    if (canRequest) {
-                        cordova.plugins.locationAccuracy.request(function () {
-                            console.log('Request successful');
-                            self.locateHero();
-                            // tslint:disable-next-line:no-shadowed-variable
-                        }, function (error) {
-                            console.error('Request failed');
-                            if (error) {
-                                // Android only
-                                console.error('error code=' + error.code + '; error message=' + error.message);
-                                if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
-                                    if (window.confirm('Fallo al activar automaticamente la ubicacion, activar ubicacion manualmente?')) {
-                                        cordova.plugins.diagnostic.switchToLocationSettings();
-                                    }
-                                }
-                            }
-                        }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY // iOS will ignore this
-                        );
-                    }
-                });
+                self.requestUbi();
             }
         }
+    };
+    HeroDetailComponent.prototype.requestUbi = function () {
+        var self = this;
+        cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+            if (canRequest) {
+                cordova.plugins.locationAccuracy.request(function () {
+                    console.log('Request successful');
+                    self.locateHero();
+                    // tslint:disable-next-line:no-shadowed-variable
+                }, function (error) {
+                    console.error('Request failed');
+                    if (error) {
+                        // Android only
+                        console.error('error code=' + error.code + '; error message=' + error.message);
+                        if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
+                            if (window.confirm('Fallo al activar automaticamente la ubicacion, activar ubicacion manualmente?')) {
+                                cordova.plugins.diagnostic.switchToLocationSettings();
+                            }
+                        }
+                    }
+                }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY // iOS will ignore this
+                );
+            }
+        });
     };
     return HeroDetailComponent;
 }());
