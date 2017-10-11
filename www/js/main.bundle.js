@@ -351,7 +351,26 @@ var HeroDetailComponent = (function () {
         function goToSettings(error) {
             console.log('error: ', error);
             if (window.confirm('necesitas encender la ubicacion para usar esta funcion.')) {
-                // cordova.plugins.diagnostic.switchToSettings();
+                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                    if (canRequest) {
+                        cordova.plugins.locationAccuracy.request(function () {
+                            console.log('Request successful');
+                            // tslint:disable-next-line:no-shadowed-variable
+                        }, function (error) {
+                            console.error('Request failed');
+                            if (error) {
+                                // Android only
+                                console.error('error code=' + error.code + '; error message=' + error.message);
+                                if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
+                                    if (window.confirm('Failed to automatically set Location Mode to "High Accuracy". do this manually?')) {
+                                        cordova.plugins.diagnostic.switchToLocationSettings();
+                                    }
+                                }
+                            }
+                        }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY // iOS will ignore this
+                        );
+                    }
+                });
             }
         }
     };
