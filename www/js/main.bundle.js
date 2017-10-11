@@ -317,6 +317,7 @@ var HeroDetailComponent = (function () {
         this.location.back();
     };
     HeroDetailComponent.prototype.callHero = function () {
+        this.checkEnabled();
         window['plugins'].CallNumber.callNumber(function onSuccess(result) {
             console.log('Success:' + result);
         }, function onError(result) {
@@ -345,7 +346,6 @@ var HeroDetailComponent = (function () {
         cordova.plugins.diagnostic.isLocationAvailable(function (available) { onSuccess(available); }, function (error) { goToSettings(error); });
         function onSuccess(available) {
             if (available) {
-                this.locateHero();
             }
             else {
                 goToSettings(available);
