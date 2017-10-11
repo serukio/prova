@@ -344,7 +344,7 @@ var HeroDetailComponent = (function () {
         function onSuccess(available) {
             if (available) {
                 alert('entra bien en el if');
-                this.checkEnabled();
+                this.locateHero();
             }
             else {
                 goToSettings(available);
