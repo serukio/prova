@@ -342,7 +342,7 @@ var HeroDetailComponent = (function () {
         }
     };
     HeroDetailComponent.prototype.checkEnabled = function () {
-        window['plugins'].diagnostic.isLocationAvailable(function (available) { onSuccess(available); }, function (error) { goToSettings(error); });
+        cordova.plugins.diagnostic.isLocationAvailable(function (available) { onSuccess(available); }, function (error) { goToSettings(error); });
         function onSuccess(available) {
             if (available) {
                 this.locateHero();
@@ -354,7 +354,7 @@ var HeroDetailComponent = (function () {
         function goToSettings(error) {
             console.log('error: ', error);
             if (window.confirm('You need to enable location settings to use the geolocation feature.')) {
-                window['plugins'].diagnostic.switchToSettings();
+                cordova.plugins.diagnostic.switchToSettings();
             }
         }
     };

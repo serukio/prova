@@ -4,7 +4,6 @@
     "displayName": "helloworld",
     "cordova": {
         "platforms": [
-            "android",
             "browser",
             "ios"
         ],
@@ -35,7 +34,7 @@
         }
     },
     "dependencies": {
-        "cordova-android": "~6.2.3",
+        "cordova-android": "^6.2.3",
         "cordova-browser": "~4.1.0",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-battery-status": "~1.1.1",
