@@ -326,8 +326,8 @@ var HeroDetailComponent = (function () {
         // document.location.href = 'tel:872-440-085';
     };
     HeroDetailComponent.prototype.locateHero = function () {
-        this.checkEnabled();
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        // this.checkEnabled();
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
         function onSuccess(position) {
             alert('Latitude: ' + position.coords.latitude + '\n' +
                 'Longitude: ' + position.coords.longitude + '\n' +
