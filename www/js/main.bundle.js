@@ -267,7 +267,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/hero-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"hero\">\n  <h2>{{hero.name}} details!</h2>\n  <div>\n    <label>id: </label>{{hero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n   </div>\n</div>\n<button (click)=\"goBack()\">Back</button>\n<button (click)=\"save()\">Save</button>\n<button (click)=\"callHero()\">CALL THE HERO!</button>\n<button (click)=\"locateHero()\">Where's the hero!?</button>"
+module.exports = "<div *ngIf=\"hero\">\n  <h2>{{hero.name}} details!</h2>\n  <div>\n    <label>id: </label>{{hero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n   </div>\n</div>\n<button (click)=\"goBack()\">Back</button>\n<button (click)=\"save()\">Save</button>\n<button (click)=\"callHero()\">CALL THE HERO!</button>\n<button (click)=\"checkEnabled()\">Where's the hero!?</button>"
 
 /***/ }),
 
@@ -325,7 +325,6 @@ var HeroDetailComponent = (function () {
         // document.location.href = 'tel:872-440-085';
     };
     HeroDetailComponent.prototype.locateHero = function () {
-        this.checkEnabled();
         navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
         function onSuccess(position) {
             alert('Latitude: ' + position.coords.latitude + '\n' +
@@ -346,7 +345,7 @@ var HeroDetailComponent = (function () {
         cordova.plugins.diagnostic.isLocationEnabled(function (available) { onSuccess(available); }, function (error) { goToSettings(error); });
         function onSuccess(available) {
             if (available) {
-                window.confirm('ok');
+                this.locateHero();
             }
             else {
                 goToSettings(available);
