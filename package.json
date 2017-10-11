@@ -29,7 +29,9 @@
             "cordova-plugin-statusbar": {},
             "cordova-plugin-vibration": {},
             "cordova-plugin-whitelist": {},
-            "cordova-plugin-call-number": {}
+            "cordova-plugin-call-number": {},
+            "cordova.plugins.diagnostic": {},
+            "cordova-plugin-request-location-accuracy": {}
         }
     },
     "dependencies": {
@@ -53,9 +55,11 @@
         "cordova-plugin-media": "~2.2.0",
         "cordova-plugin-media-capture": "~1.2.0",
         "cordova-plugin-network-information": "~1.2.0",
+        "cordova-plugin-request-location-accuracy": "^2.2.2",
         "cordova-plugin-splashscreen": "~3.2.1",
         "cordova-plugin-statusbar": "~2.1.2",
         "cordova-plugin-vibration": "~2.1.0",
-        "cordova-plugin-whitelist": "~1.2.1"
+        "cordova-plugin-whitelist": "~1.2.1",
+        "cordova.plugins.diagnostic": "^3.7.1"
     }
 }

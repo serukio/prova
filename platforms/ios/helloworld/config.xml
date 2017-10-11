@@ -78,6 +78,12 @@
     <feature name="CallNumber">
         <param name="ios-package" value="CFCallNumber" />
     </feature>
+    <feature name="Diagnostic">
+        <param name="ios-package" value="Diagnostic" />
+    </feature>
+    <feature name="RequestLocationAccuracy">
+        <param name="ios-package" value="RequestLocationAccuracy" />
+    </feature>
     <name>helloworld</name>
     <description>
         Hello World sample application that responds to the deviceready event.
