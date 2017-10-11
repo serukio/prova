@@ -325,10 +325,8 @@ var HeroDetailComponent = (function () {
         // document.location.href = 'tel:872-440-085';
     };
     HeroDetailComponent.prototype.locateHero = function () {
-        alert('entra en la funcion');
         navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
         function onSuccess(position) {
-            alert('entra bien en la funcion on success');
             alert('Latitude: ' + position.coords.latitude + '\n' +
                 'Longitude: ' + position.coords.longitude + '\n' +
                 'Altitude: ' + position.coords.altitude + '\n');
@@ -340,20 +338,11 @@ var HeroDetailComponent = (function () {
         }
     };
     HeroDetailComponent.prototype.checkEnabled = function () {
+        var self = this;
         cordova.plugins.diagnostic.isLocationEnabled(function (available) { onSuccess(available); }, function (error) { goToSettings(error); });
         function onSuccess(available) {
             if (available) {
-                alert('entra bien en el if');
-                navigator.geolocation.getCurrentPosition(function onSuccess1(position) {
-                    alert('entra bien en la funcion on success');
-                    alert('Latitude: ' + position.coords.latitude + '\n' +
-                        'Longitude: ' + position.coords.longitude + '\n' +
-                        'Altitude: ' + position.coords.altitude + '\n');
-                }, function onError(error) {
-                    alert('da error');
-                    alert('code: ' + error.code + '\n' +
-                        'message: ' + error.message + '\n');
-                }, { enableHighAccuracy: true });
+                self.locateHero();
             }
             else {
                 goToSettings(available);
@@ -361,7 +350,7 @@ var HeroDetailComponent = (function () {
         }
         function goToSettings(error) {
             console.log('error: ', error);
-            if (window.confirm('necesitas encender la localizacion para usar esta funcion.')) {
+            if (window.confirm('necesitas encender la ubicacion para usar esta funcion.')) {
                 // cordova.plugins.diagnostic.switchToSettings();
             }
         }
